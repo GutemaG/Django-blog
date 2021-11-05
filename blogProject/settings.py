@@ -37,7 +37,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'height': 500,
+        'toolbar_Custom': [['*','CodeSnippet']],
+        'extraPlugins':'codesnippet'
+    },
+    'special': {
+        'toolbar': 'Special',
+        'toolbar_Special': [['Bold', 'CodeSnippet']],
+        'extraPlugins': 'codesnippet'
+    }
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -118,7 +138,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR/'static'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR/'media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+  <head>
+    {% include 'head.html' %}
+    
+  </head> 
+  <body>
+    <!-- Header -->
+    {% include 'navbar.html' %}
+    <!-- EndHeader -->
+
+    <div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8"> 
+          <div class="container">
+            <div class="row">
+              {% for blog in blogs %}
+              
+              <!-- post             -->
+              <div class="post col-xl-6">
+                <div class="post-thumbnail"><a href="{% url 'read-blog' blog.pk %}"><img src="{% static 'second/img/blog-post-2.jpg' %}" alt="..." class="img-fluid"></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last">{{blog.created_at|timesince}}</div>
+                    <!-- <div class="category"><a href="#">Business</a></div> -->
+                  </div><a href="post.html">
+                    <h3 class="h4">{{blog.title}}</h3></a>
+                  <p class="text-muted">{{blog.description}}</p>
+                  <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                      <div class="avatar"><img src="{% static 'second/img/avatar-2.jpg' %}" alt="..." class="img-fluid"></div>
+                      <div class="title"><span>{{blog.author.username}}</span></div></a>
+                    <!-- <div class="date"><i class="icon-clock"></i> 2 months ago</div> -->
+                    <!-- <div class="comments meta-last"><i class="icon-comment"></i>12</div> -->
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                <li class="page-item"><a href="#" class="page-link active">1</a></li>
+                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                <li class="page-item"><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+              </ul>
+            </nav>
+
+          </div>
+        </main>
+        <aside class="col-lg-4">
+          {% include 'right_side.html' %}
+          
+        </aside>
+      </div>
+    </div>
+    <!-- Page Footer-->
+   {% include 'footer.html' %}
+    
+    <script src="{% static 'second/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'second/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'second/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'second/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'second/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'second/js/front.js' %}"></script>
+  </body>
+</html>

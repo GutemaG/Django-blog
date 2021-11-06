@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+        <div class="col-md-8 blog-main">
+          <h6 class="pb-3 mb-4 font-italic border-bottom">
+            {{blog.title}}
+          </h6>
+          <div class="blog-post">
+            <h2 class="blog-post-title">{{blog.title}}</h2>
+            <p class="blog-post-meta">{{blog.created_at}} by <a href="#">{{blog.author.username}}</a></p>
+            <p>{{blog.description}}</p>
+            {% for tag in blog.tags.all %}
+              <a href="#" class="mr-2">
+                {{tag.name}}
+              </a> 
+            {% endfor %}
+            <!-- <p>List of tags {{blog.tags.first}}</p> -->
+            <hr>
+              {{blog.body|safe}}
+          </div>
+          
+          <!-- <nav class="blog-pagination">
+            <a class="btn btn-outline-primary" href="#">Older</a>
+            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+          </nav> -->
+
+        </div><!-- /.blog-main -->
+
+       {% include 'blog/right_sidebar.html' %}
+        
+        <!-- /.blog-sidebar -->
+
+      </div>
+{% endblock content %}

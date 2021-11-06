@@ -18,8 +18,8 @@ class Blog(models.Model):
         ('AD', 'Advance'),
     ]
     title = models.CharField(max_length=250)
-    # body = models.TextField()
-    # body = RichTextField(blank=True, null=True)
+    description = models.TextField()
+
     body = RichTextUploadingField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -43,18 +43,31 @@ INSTALLED_APPS = [
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
-
 CKEDITOR_CONFIGS = {
     'default': {
+        'skin': 'moono',
         'toolbar': 'Custom',
         'height': 500,
-        'toolbar_Custom': [['*','CodeSnippet']],
-        'extraPlugins':'codesnippet'
+        'toolbar_Custom': [
+            ['Styles', 'CodeSnippet', 'Format', 'Bold','Font',
+                'Italic', 'Underline','Strike', 'Size', 'Normal','TextColor','BGColor'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft',
+                'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'CreateDiv'],
+            ['Link', 'Unlink'],
+            ['Image', 'Table', 'HorizontalRule','PageBreak'],
+            ['Smiley', 'SpecialChar'],
+            ['Textcolor', 'BGColor'],
+            ['Smiley', 'SpecialChar'],
+            ['Source','Preview'],
+            ['Cut', 'Copy','Past','Undo','Redo','Replace', 'SelectAll','Subscript','Superscript'],
+            ['Maximize','Preview'],
+
+        ],
+        'extraPlugins': 'codesnippet'
     },
     'special': {
         'toolbar': 'Special',
-        'toolbar_Special': [['Bold', 'CodeSnippet']],
-        'extraPlugins': 'codesnippet'
+        'toolbar_Special': [['Bold', 'Italic']],
     }
 }
 
@@ -74,7 +87,7 @@ ROOT_URLCONF = 'blogProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,7 +151,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR/'static'
+# STATIC_ROOT = BASE_DIR/'static'
+
+STATICFILES_DIRS = [BASE_DIR/'static']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media/'

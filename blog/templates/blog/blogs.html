@@ -1,16 +1,7 @@
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
 {% load static %}
-
-<html>
-  <head>
-    {% include 'head.html' %}
-    
-  </head> 
-  <body>
-    <!-- Header -->
-    {% include 'navbar.html' %}
-    <!-- EndHeader -->
+{% block content %}
 
     <div class="container">
       <div class="row">
@@ -22,18 +13,31 @@
               
               <!-- post             -->
               <div class="post col-xl-6">
-                <div class="post-thumbnail"><a href="{% url 'read-blog' blog.pk %}"><img src="{% static 'second/img/blog-post-2.jpg' %}" alt="..." class="img-fluid"></a></div>
+                <div class="post-thumbnail"><a href="{% url 'read-blog' blog.pk %}">
+
+                  <img src="{{blog.cover_image.url}}" alt="..." class="img-fluid"></a>
+                </div>
                 <div class="post-details">
                   <div class="post-meta d-flex justify-content-between">
                     <div class="date meta-last">{{blog.created_at|timesince}}</div>
+                    <p class="text-muted">{{blog.get_difficulty_display}}</p>
                     <!-- <div class="category"><a href="#">Business</a></div> -->
-                  </div><a href="post.html">
+                  </div><a href="{% url 'read-blog' blog.pk %}">
                     <h3 class="h4">{{blog.title}}</h3></a>
                   <p class="text-muted">{{blog.description}}</p>
+
+                <div class="post-tags">
+                    {% for tag in blog.tags.all %}
+                        <a href="#" class="tag">{{tag.name}}</a>
+                    {% endfor %}
+                </div>
                   <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                       <div class="avatar"><img src="{% static 'second/img/avatar-2.jpg' %}" alt="..." class="img-fluid"></div>
                       <div class="title"><span>{{blog.author.username}}</span></div></a>
-                    <!-- <div class="date"><i class="icon-clock"></i> 2 months ago</div> -->
+                <div class="post-tags">
+                </div>
+                    <div class="views"><i class="icon-eye"></i> 500 likes</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>0 comments</div>
                     <!-- <div class="comments meta-last"><i class="icon-comment"></i>12</div> -->
                   </div>
                 </div>
@@ -60,14 +64,4 @@
         </aside>
       </div>
     </div>
-    <!-- Page Footer-->
-   {% include 'footer.html' %}
-    
-    <script src="{% static 'second/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'second/popper.js/umd/popper.min.js' %}"> </script>
-    <script src="{% static 'second/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'second/jquery.cookie/jquery.cookie.js' %}"> </script>
-    <script src="{% static 'second/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
-    <script src="{% static 'second/js/front.js' %}"></script>
-  </body>
-</html>
+{% endblock content %}

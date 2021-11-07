@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+  <head>
+    {% include 'head.html' %}
+    
+    <link rel="stylesheet" href="{% static 'plugin/highlight.css' %}">
+    <script src="{% static 'plugin/highlight.js' %}"></script>
+    <script>hljs.highlightAll();</script>
+  </head>
+  <body>
+    <header class="header">
+      {% include 'navbar.html' %}
+      
+    </header>
+        <div>
+            {% block content %}
+            
+            {% endblock content %}
+        </div>
+        <!-- Page Footer-->
+        {% include 'footer.html' %}
+     
+    <!-- JavaScript files-->
+    <script src="{% static 'second/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'second/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'second/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'second/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'second/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'second/js/front.js' %}"></script>
+  </body>
+</html>

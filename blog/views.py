@@ -10,6 +10,8 @@ def home(request):
 
 def blogs(request):
     blogs = Blog.objects.all()
+    # for blog in blogs:
+    #     blog['tags'] = blog.tags.all()
     tags = Tag.objects.all()
     context = {'blogs':blogs,'all_tags':tags}
     return render(request, 'blog/blogs.html', context)

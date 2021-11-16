@@ -36,8 +36,8 @@
                       <div class="title"><span>{{blog.author.username}}</span></div></a>
                 <div class="post-tags">
                 </div>
-                    <div class="views"><i class="icon-eye"></i> 500 likes</div>
-                    <div class="comments meta-last"><i class="icon-comment"></i>0 comments</div>
+                    <div class="views"><i class="icon-eye"></i>{{blog.like_set.all.count}}</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>{{blog.comments.all.count}}</div>
                     <!-- <div class="comments meta-last"><i class="icon-comment"></i>12</div> -->
                   </div>
                 </div>

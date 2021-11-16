@@ -76,6 +76,14 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.body
+
+
+'''
+/**
+  TODO Add Bookmark for blogs
+*/
+'''

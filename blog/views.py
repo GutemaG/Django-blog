@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Blog,Tag
+from .models import Blog, Category, Comment,Tag, Like
 from .forms import BlogForm
 # Create your views here.
 def home(request):
@@ -10,17 +10,21 @@ def home(request):
 
 def blogs(request):
     blogs = Blog.objects.all()
-    # for blog in blogs:
-    #     blog['tags'] = blog.tags.all()
+    #  likes = Like.objects.filter(blog=blog)
+    # comments = Comment.objects.filter(blog=blog)
     tags = Tag.objects.all()
     context = {'blogs':blogs,'all_tags':tags}
     return render(request, 'blog/blogs.html', context)
 
 def read_blog(request,pk):
     blog = Blog.objects.get(pk=pk)
+    likes = Like.objects.filter(blog=blog)
+    comments = Comment.objects.filter(blog=blog)
+    catagories = Category.objects.all()
     tags = blog.tags.all()
     all_tags = Tag.objects.all()
-    context = {'blog':blog,'tags':tags,'all_tags':all_tags}
+    context = {'blog':blog,'tags':tags,'all_tags':all_tags,
+        'likes':likes, 'comments':comments,'catagories':catagories}
     return render(request, 'blog/blog_detail.html',context)
 
 def add_blog(request):

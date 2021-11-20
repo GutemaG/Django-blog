@@ -35,14 +35,25 @@
               <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
               </li>
                 {% if user.is_authenticated %}
-                  <li class="nav-item"><a href="#" class="nav-link ">newBlog</a> </li>
-                  <li class="nav-item"><a href="#" class="nav-link ">Logout</a> </li>
+                
+              
+                <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"
+                    role="button" data-toggle="dropdown">profile</a>
+                  <div class="dropdown-menu">
+                      <a href="{% url 'create-blog' %}" class="dropdown-item ">Create New Blog</a>
+                      <a href="{%url 'auth-user-blog' %}" class="dropdown-item">Your blogs</a>
+                      <a href="#" class="dropdown-item">Settings</a>
+                      <div class="dropdown-divider"></div>
+                      <a href="#" class="dropdown-item">Logout</a>
+                  </div>
+                </li>
                 {%else%}
-                  <li class="nav-item"><a href="#" class="nav-link ">Login</a> </li>
-                {%endif%}
+                <li class="nav-item"><a href="#" class="nav-link ">Login</a> </li>
+              {%endif%}
             </ul>
             <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
-            <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul>
+            {% comment %} <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul> {% endcomment %}
           </div>
         </div>
       </nav>

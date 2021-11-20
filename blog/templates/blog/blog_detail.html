@@ -16,14 +16,26 @@
                     <div class="date">{{blog.created_at|timesince}} ago</div>
                   <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
                 </div>
-                <h1>{{blog.title}}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                <h1>
+                {{blog.title}}
+                    {% if user == blog.author %}
+
+                       <a href="{% url 'edit-blog' blog.pk %} ">
+                        <i class="fa fa-edit fa-blue"></i></a>
+                    {% else %}
+                      <a href="#"><i class="fa fa-bookmark-o"></i></a>
+                    {% endif %}
+
+                </h1>
                 <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
                     <div class="avatar"><img src="https://d19m59y37dris4.cloudfront.net/blog/1-2-1/img/avatar-1.jpg" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{blog.author.username}}</span></div></a>
                   <div class="d-flex align-items-center flex-wrap">       
                     <!-- <div class="date">{{blog.created_at|timesince}}</div> -->
                     <div class="views" title="likes"><i class="fa fa-heart"></i> {{likes.count}}</div>
-                    <div class="comments meta-last" title="comments"><i class="fa fa-comment"></i>{{comments.count}}</div>
+                    <div class="comments meta-last" title="comments">
+                       <a href="#comment_body"> <i class="fa fa-comment"></i>{{comments.count}} </a>
+                      </div>
                   </div>
                 </div>
                 <hr class="m-1">

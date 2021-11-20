@@ -36,9 +36,9 @@
                       <div class="title"><span>{{blog.author.username}}</span></div></a>
                 <div class="post-tags">
                 </div>
-                    <div class="views"><i class="icon-eye"></i>{{blog.like_set.all.count}}</div>
-                    <div class="comments meta-last"><i class="icon-comment"></i>{{blog.comments.all.count}}</div>
-                    <!-- <div class="comments meta-last"><i class="icon-comment"></i>12</div> -->
+                    <div class="views" title="likes"><i class="fa fa-heart"></i>{{blog.like_set.all.count}}</div>
+                       <a href="#comment_body">
+                          <i class="fa fa-comment"></i> {{blog.comment_set.all.count}} </a>
                   </div>
                 </div>
               </div>

@@ -30,18 +30,16 @@ def read_blog(request,pk):
         'likes':likes, 'comments':comments,'catagories':catagories}
     return render(request, 'blog/blog_detail.html',context)
 
+
+@login_required
 def create_blog(request):
+    form = BlogForm()
     if request.method == 'POST':
         form = BlogForm(request.POST, request.FILES)
-        print(form.is_valid())
-        print(form.cleaned_data.get('cover_image'))
         if form.is_valid():
             blog = form.save()
             return redirect('read-blog',blog.id)
         #     print("********* Form is Valid *********")
-    else:
-        print("######### Invalid #######\n")
-        form = BlogForm()
     context = {'form':form}
     return render(request, 'blog/blog_create.html', context)
 
@@ -49,20 +47,21 @@ def about(request):
     return render(request, 'blog/about.html')
 
 
-@login_required(login_url='/')
+@login_required
 def add_comment(request, pk):
     if request.method == 'POST':
         blog = Blog.objects.get(pk=pk)
         user = request.user
         body = request.POST.get('body')
         comment = Comment(body=body, user=user,blog=blog)
-        print(comment)
+        # print(comment)
         comment.save()
         next = request.POST.get('next','/')
         return HttpResponseRedirect(next)
-    else:
-        return redirect('home')
+    
+    return redirect('home')
 
+@login_required
 def edit_blog(request,pk):
     blog = Blog.objects.get(pk=pk)
     form = BlogForm(instance=blog)
@@ -74,7 +73,7 @@ def edit_blog(request,pk):
     context={'blog':blog,'form':form}
     return render(request, 'blog/blog_edit.html',context)
 
-
+@login_required
 def auth_user_blog(request):
     user = request.user
     blogs = Blog.objects.filter(author= user)

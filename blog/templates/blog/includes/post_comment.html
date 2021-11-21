@@ -38,7 +38,7 @@
       <div class="user d-flex align-items-center">
         <div class="image">
           <img
-            src="https://d19m59y37dris4.cloudfront.net/blog/1-2-1/img/user.svg"
+            src="{{comment.user.profile.image.url}}"
             alt="..."
             class="img-fluid rounded-circle"
           />
@@ -63,7 +63,7 @@
   <form action="{% url 'add-comment' blog.pk %}" method="POST" class="commenting-form">
     {% csrf_token %}
     <div class="row">
-      <h1>{{blog.pk}}</h1>
+      {% comment %} <h1>{{blog.pk}}</h1> {% endcomment %}
       <div class="form-group col-md-12">
         <textarea
           name="body"

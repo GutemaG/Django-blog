@@ -32,7 +32,7 @@
                     {% endfor %}
                 </div>
                   <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                      <div class="avatar"><img src="{% static 'second/img/avatar-2.jpg' %}" alt="..." class="img-fluid"></div>
+                      <div class="avatar"><img src="{{ blog.author.profile.image.url }}" alt="..." class="img-fluid"></div>
                       <div class="title"><span>{{blog.author.username}}</span></div></a>
                 <div class="post-tags">
                 </div>

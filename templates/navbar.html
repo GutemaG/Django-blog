@@ -39,17 +39,18 @@
               
                 <li class="nav-item dropdown">
                   <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"
-                    role="button" data-toggle="dropdown">profile</a>
+                    role="button" data-toggle="dropdown">{{request.user.username}}</a>
                   <div class="dropdown-menu">
                       <a href="{% url 'create-blog' %}" class="dropdown-item ">Create New Blog</a>
                       <a href="{%url 'auth-user-blog' %}" class="dropdown-item">Your blogs</a>
-                      <a href="#" class="dropdown-item">Settings</a>
+                      <a href="{%url 'profile' %}" class="dropdown-item">Settings</a>
                       <div class="dropdown-divider"></div>
-                      <a href="#" class="dropdown-item">Logout</a>
+                      <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                   </div>
                 </li>
                 {%else%}
-                <li class="nav-item"><a href="#" class="nav-link ">Login</a> </li>
+                <li class="nav-item"><a href="{% url 'login' %}" class="nav-link ">Login</a> </li>
+                <li class="nav-item"><a href="{% url 'register' %}" class="nav-link ">Regsiter</a> </li>
               {%endif%}
             </ul>
             <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>

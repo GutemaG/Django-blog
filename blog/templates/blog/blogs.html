@@ -15,7 +15,7 @@
               <div class="post col-xl-6">
                 <div class="post-thumbnail"><a href="{% url 'read-blog' blog.pk %}">
 
-                  <img src="{{blog.cover_image.url}}" alt="..." class="img-fluid"></a>
+                  <img width="340" height="300" src="{{blog.cover_image.url}}" alt="..." class=""></a>
                 </div>
                 <div class="post-details">
                   <div class="post-meta d-flex justify-content-between">
@@ -31,9 +31,11 @@
                         <a href="#" class="tag">{{tag.name}}</a>
                     {% endfor %}
                 </div>
-                  <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="post-footer d-flex align-items-center">
+                  <a href="{% url 'user-account-detail' blog.author.pk %}" class="author d-flex align-items-center flex-wrap">
                       <div class="avatar"><img src="{{ blog.author.profile.image.url }}" alt="..." class="img-fluid"></div>
-                      <div class="title"><span>{{blog.author.username}}</span></div></a>
+                      <div class="title"><span>{{blog.author.username}}</span></div>
+                    </a>
                 <div class="post-tags">
                 </div>
                     <div class="views" title="likes"><i class="fa fa-heart"></i>{{blog.like_set.all.count}}</div>

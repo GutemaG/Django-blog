@@ -28,7 +28,7 @@
             <ul class="navbar-nav ml-auto">
               <li class="nav-item"><a href="{% url 'home' %}" class="nav-link ">Home</a>
               </li>
-              <li class="nav-item"><a href="{% url 'blogs' %} " class="nav-link active ">Blog</a>
+              <li class="nav-item"><a href="{% url 'blogs' 'all' %} " class="nav-link active ">Blog</a>
               </li>
               <li class="nav-item"><a href="post.html" class="nav-link ">Post</a>
               </li>
@@ -43,6 +43,7 @@
                   <div class="dropdown-menu">
                       <a href="{% url 'create-blog' %}" class="dropdown-item ">Create New Blog</a>
                       <a href="{%url 'auth-user-blog' %}" class="dropdown-item">Your blogs</a>
+                      {% comment %} <a href="{%url 'bookmarked' %}" class="dropdown-item">Bookmarked</a> {% endcomment %}
                       <a href="{%url 'profile' %}" class="dropdown-item">Settings</a>
                       <div class="dropdown-divider"></div>
                       <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>

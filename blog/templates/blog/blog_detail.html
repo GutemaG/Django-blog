@@ -23,7 +23,7 @@
                        <a href="{% url 'edit-blog' blog.pk %} ">
                         <i class="fa fa-edit fa-blue"></i></a>
                     {% else %}
-                      <a href="#"><i class="fa fa-bookmark-o"></i></a>
+                      <a href="{%url 'bookmark' blog.pk %}"><i class="fa fa-bookmark-o"></i></a>
                     {% endif %}
 
                 </h1>
@@ -50,6 +50,22 @@
                         <a href="#" class="tag">{{tag.name}}</a>
                     {% endfor %}
                 </div>
+                {% if blog.author != request.user %}
+                <hr>
+                    {% if is_liked_by_user %}
+                    <div class="view" title="you already like post!">
+                       <a href="#">
+                        <i style="font-size:40px;color:red;" class="fa fa-heart"></i>
+                       </a>
+                     </div>
+                     {%else%}
+                     <div class="view" title="like post">
+                       <a href="{% url 'like-blog' blog.pk %}">
+                        <i style="font-size:40px;" class="fa fa-heart"></i>
+                       </a>
+                     </div>
+                    {% endif %}
+                {% endif %}
                  {% comment %} {% include 'includes/post_comment.html' %} {% endcomment %}
                   {% include './includes/post_comment.html' %}
                 
@@ -59,77 +75,9 @@
           </div>
         </main>
         <aside class="col-lg-4">
-          <!-- Widget [Search Bar Widget]-->
-          <div class="widget search">
-            <header>
-              <h3 class="h6">Search the blog</h3>
-            </header>
-            <form action="#" class="search-form">
-              <div class="form-group">
-                <input type="search" placeholder="What are you looking for?">
-                <button type="submit" class="submit"><i class="icon-search"></i></button>
-              </div>
-            </form>
-          </div>
-          <!-- Widget [Latest Posts Widget]        -->
-          <div class="widget latest-posts">
-            <header>
-              <h3 class="h6">Latest Posts</h3>
-            </header>
-            <div class="blog-posts"><a href="#">
-                <div class="item d-flex align-items-center">
-                  <div class="image"><img src="https://d19m59y37dris4.cloudfront.net/blog/1-2-1/img/small-thumbnail-1.jpg" alt="..." class="img-fluid"></div>
-                  <div class="title"><strong>Alberto Savoia Can Teach You About</strong>
-                    <div class="d-flex align-items-center">
-                      <div class="views"><i class="icon-eye"></i> 500</div>
-                      <div class="comments"><i class="icon-comment"></i>12</div>
-                    </div>
-                  </div>
-                </div></a><a href="#">
-                <div class="item d-flex align-items-center">
-                  <div class="image"><img src="https://d19m59y37dris4.cloudfront.net/blog/1-2-1/img/small-thumbnail-2.jpg" alt="..." class="img-fluid"></div>
-                  <div class="title"><strong>Alberto Savoia Can Teach You About</strong>
-                    <div class="d-flex align-items-center">
-                      <div class="views"><i class="icon-eye"></i> 500</div>
-                      <div class="comments"><i class="icon-comment"></i>12</div>
-                    </div>
-                  </div>
-                </div></a><a href="#">
-                <div class="item d-flex align-items-center">
-                  <div class="image"><img src="https://d19m59y37dris4.cloudfront.net/blog/1-2-1/img/small-thumbnail-3.jpg" alt="..." class="img-fluid"></div>
-                  <div class="title"><strong>Alberto Savoia Can Teach You About</strong>
-                    <div class="d-flex align-items-center">
-                      <div class="views"><i class="icon-eye"></i> 500</div>
-                      <div class="comments"><i class="icon-comment"></i>12</div>
-                    </div>
-                  </div>
-                </div></a></div>
-          </div>
-          <!-- Widget [Categories Widget]-->
-          <div class="widget categories">
-            <header>
-              <h3 class="h6">Categories</h3>
-            </header>
-             {% for catagory in catagories %}
-              <div class="item d-flex justify-content-between"><a href="#">{{catagory.name}}</a><span>12</span></div>
-            {% endfor %}
-            <div class="item d-flex justify-content-between"><a href="#">Sales</a><span>8</span></div>
-            <div class="item d-flex justify-content-between"><a href="#">Tips</a><span>17</span></div>
-            <div class="item d-flex justify-content-between"><a href="#">Local</a><span>25</span></div>
-          </div>
-          <!-- Widget [Tags Cloud Widget]-->
-          <div class="widget tags">       
-            <header>
-              <h3 class="h6">Tags</h3>
-            </header>
-            <ul class="list-inline">
-                {% for tag in all_tags %}
-                
-                    <li class="list-inline-item"><a href="#" class="tag">{{tag.name}}</a></li>
-                {% endfor %}
-            </ul>
-          </div>
+          {% include 'right_side.html' %}
         </aside>
+        
       </div>
     </div>
 {% endblock content %}

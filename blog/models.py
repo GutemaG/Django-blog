@@ -81,9 +81,25 @@ class Comment(models.Model):
     def __str__(self):
         return self.body
 
+class Bookmark(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.blog.title} => {self.user.username}'
+
+class Bookmarked(models.Model):
+    user = models.ManyToManyField(User)
+    blog = models.ManyToManyField(Blog)
+
+    def __str__(self):
+        return f'{self.blog.title} => {self.user.username}'
+
+
 
 '''
 /**
   TODO Add Bookmark for blogs
+  TODO Remove changing the author of the blog post
 */
 '''

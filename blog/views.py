@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from .models import Blog, Category, Comment,Tag, Like
+from .models import Blog, Category, Comment,Tag, Like,Bookmark
 from .forms import BlogForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
@@ -11,23 +12,38 @@ def home(request):
     context = {'blogs':blogs,'tags':tags}
     return render(request, 'blog/home.html',context)
 
-def blogs(request):
-    blogs = Blog.objects.all()
-    #  likes = Like.objects.filter(blog=blog)
-    # comments = Comment.objects.filter(blog=blog)
+def blogs(request, tag='all'):
+    if tag == 'all': 
+        blogs = Blog.objects.all()
+    else:
+        t = Tag.objects.get(name=tag)
+        blogs = t.blog_set.all()
+        # blogs = Blog.objects.filter(tags=t)
+    catagories = Category.objects.all()
     tags = Tag.objects.all()
-    context = {'blogs':blogs,'all_tags':tags}
+    latest_blogs = Blog.objects.all().order_by('-updated_at')[:5]
+    context = {
+        'blogs':blogs,'all_tags':tags,'catagories':catagories,
+        'latest_blogs':latest_blogs,
+        }
     return render(request, 'blog/blogs.html', context)
 
 def read_blog(request,pk):
     blog = Blog.objects.get(pk=pk)
     likes = Like.objects.filter(blog=blog)
+    is_liked_by_user = likes.filter(user=request.user).exists()
     comments = Comment.objects.filter(blog=blog)
     catagories = Category.objects.all()
+    latest_blogs = Blog.objects.all().order_by('-updated_at')[:5]
+    print(latest_blogs)
     tags = blog.tags.all()
     all_tags = Tag.objects.all()
-    context = {'blog':blog,'tags':tags,'all_tags':all_tags,
-        'likes':likes, 'comments':comments,'catagories':catagories}
+    context = {
+        'blog':blog,'tags':tags,'all_tags':all_tags,
+        'likes':likes, 'comments':comments,'catagories':catagories,
+        'is_liked_by_user':is_liked_by_user,
+        'latest_blogs':latest_blogs
+        }
     return render(request, 'blog/blog_detail.html',context)
 
 
@@ -82,3 +98,35 @@ def auth_user_blog(request):
     tags = Tag.objects.all()
     context = {'blogs':blogs,'all_tags':tags}
     return render(request, 'blog/blogs.html', context)
+
+
+@login_required
+def auth_user_bookmark(request):
+    user = request.user
+    # bookmarks = Bookmark.objects.filter(user= user)
+    blogs = Blog.objects.filter()
+    print(blogs)
+    catagories = Category.objects.all()
+    tags = Tag.objects.all()
+    latest_blogs = Blog.objects.all().order_by('-updated_at')[:5]
+    context = {
+        'blogs':blogs,'all_tags':tags,'catagories':catagories,
+        'latest_blogs':latest_blogs,
+        }
+    return render(request, 'blog/blogs.html', context)
+    # return redirect('home')
+
+@login_required
+def like_blog(request,pk):
+    blog = Blog.objects.get(pk = pk)
+    like = Like.objects.create(user=request.user, blog=blog, liked=True)
+    return redirect('read-blog',pk)
+
+
+@login_required
+def bookmark(request,pk):
+    user = request.user
+    blog = Blog.objects.get(pk=pk)
+    Bookmark.objects.create(user=user, blog=blog)
+    return redirect('read-blog',pk)
+

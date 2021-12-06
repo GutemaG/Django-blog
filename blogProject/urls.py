@@ -14,14 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import render
 from django.urls import path
 from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
+
+def contact_me(request):
+    return render(request, 'contact-me.html')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include('blog.urls')),
     path('auth/',include('accounts.urls')),
+    path('contact-me/',contact_me,name="contact-me"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

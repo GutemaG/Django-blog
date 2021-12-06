@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
+
 {% load static %}
 {% block content %}
-
-    <div class="container">
+<div class="container">
       <div class="row">
         <!-- Latest Posts -->
         <main class="posts-listing col-lg-8"> 
           <div class="container">
             <div class="row">
-              {% if blogs %}
-              {% for blog in blogs %}
+              {% for blog in bookmarks %}
+              
               <!-- post             -->
               <div class="post col-xl-6">
                 <div class="post-thumbnail"><a href="{% url 'read-blog' blog.pk %}">
@@ -45,13 +45,7 @@
                 </div>
               </div>
               {% endfor %}
-              {%else%}
-                <h1>No result Found</h1
-              {% endif %}
             </div>
-
-            
-
           </div>
         </main>
         <aside class="col-lg-4">
@@ -60,4 +54,4 @@
         </aside>
       </div>
     </div>
-{% endblock content %}
+{% endblock  %}%}

@@ -6,9 +6,9 @@
             <div class="close-btn"><i class="icon-close"></i></div>
             <div class="row d-flex justify-content-center">
               <div class="col-md-8">
-                <form action="#">
+                <form action="{% url 'search' %}" method="GET">
                   <div class="form-group">
-                    <input type="search" name="search" id="search" placeholder="What are you looking for?">
+                    <input type="search" name="search" id="search" autofocus placeholder="What are you looking for?">
                     <button type="submit" class="submit"><i class="icon-search-1"></i></button>
                   </div>
                 </form>
@@ -32,7 +32,7 @@
               </li>
               <li class="nav-item"><a href="post.html" class="nav-link ">Post</a>
               </li>
-              <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
+              <li class="nav-item"><a href="{%url 'contact-me' %}" class="nav-link">Contact</a>
               </li>
                 {% if user.is_authenticated %}
                 
@@ -43,7 +43,7 @@
                   <div class="dropdown-menu">
                       <a href="{% url 'create-blog' %}" class="dropdown-item ">Create New Blog</a>
                       <a href="{%url 'auth-user-blog' %}" class="dropdown-item">Your blogs</a>
-                      {% comment %} <a href="{%url 'bookmarked' %}" class="dropdown-item">Bookmarked</a> {% endcomment %}
+                      <a href="{%url 'bookmarked' %}" class="dropdown-item">Bookmarked</a>
                       <a href="{%url 'profile' %}" class="dropdown-item">Settings</a>
                       <div class="dropdown-divider"></div>
                       <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>

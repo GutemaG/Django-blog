@@ -1,10 +1,11 @@
+from enum import unique
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import related
 # from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.exceptions import ValidationError
-
+from django.db.models import UniqueConstraint
 
 # Create your models here.
 
@@ -81,19 +82,27 @@ class Comment(models.Model):
     def __str__(self):
         return self.body
 
+'''
 class Bookmark(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.blog.title} => {self.user.username}'
+'''
 
-class Bookmarked(models.Model):
-    user = models.ManyToManyField(User)
+class Bookmark(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     blog = models.ManyToManyField(Blog)
 
+    UniqueConstraint(
+        name="unique_bookmark",
+        fields=['user','blog']
+    )
+    unique_together = [['user','blog']]
     def __str__(self):
-        return f'{self.blog.title} => {self.user.username}'
+        return self.user.username
+
 
 
 

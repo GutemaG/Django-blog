@@ -5,5 +5,5 @@ blog with django framework
  * create virtual environment and activate
  * clone this repo
  * cd Django-blog
- * pip install -r requiremnts.txt
+ * pip install -r requirements.txt
  * python manage.py runserver

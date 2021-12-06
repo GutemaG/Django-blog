@@ -9,12 +9,22 @@
           <div class="container">
             <div class="post-single">
               <div class="post-thumbnail">
+               <a href="{{blog.cover_image.url}}">
                 <img src="{{blog.cover_image.url}}" alt="..." class="img-fluid">
+               </a>
               </div>
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
                     <div class="date">{{blog.created_at|timesince}} ago</div>
-                  <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
+                  <div class="category">
+                    <!-- 
+
+                      {% for category in blog.categories %}
+                      <a href="#">{{category}</a>
+                      {% endfor %}
+                    -->
+
+                  </div>
                 </div>
                 <h1>
                 {{blog.title}}
@@ -32,9 +42,23 @@
                     <div class="title"><span>{{blog.author.username}}</span></div></a>
                   <div class="d-flex align-items-center flex-wrap">       
                     <!-- <div class="date">{{blog.created_at|timesince}}</div> -->
-                    <div class="views" title="likes"><i class="fa fa-heart"></i> {{likes.count}}</div>
+                    <!-- <div class="views" title="likes"><i class="fa fa-heart"></i> {{likes.count}}</div> -->
+                    {% if is_liked_by_user %}
+                    <div class="view" title="you already like post!">
+                       <a href="#">
+                    <div class="views" title="likes"><i class="fa fa-heart" style="color:red"></i> {{likes.count}}</div>
+                        <!-- <i style="color:red;" class="ml-2 fa fa-heart"></i> {{likes.count}} | -->
+                       </a>
+                     </div>
+                     {%else%}
+                     <div class="view" title="like post">
+                       <a href="{% url 'like-blog' blog.pk %}">
+                        <i class="fa fa-heart"></i>  {{likes.count}} | 
+                       </a>
+                     </div>
+                    {% endif %}
                     <div class="comments meta-last" title="comments">
-                       <a href="#comment_body"> <i class="fa fa-comment"></i>{{comments.count}} </a>
+                       <a href="#comment_body"> <i class="fa fa-comment ml-2"></i>{{comments.count}} </a>
                       </div>
                   </div>
                 </div>
@@ -50,7 +74,7 @@
                         <a href="#" class="tag">{{tag.name}}</a>
                     {% endfor %}
                 </div>
-                {% if blog.author != request.user %}
+                <!-- {% if blog.author != request.user %}
                 <hr>
                     {% if is_liked_by_user %}
                     <div class="view" title="you already like post!">
@@ -65,7 +89,7 @@
                        </a>
                      </div>
                     {% endif %}
-                {% endif %}
+                {% endif %} -->
                  {% comment %} {% include 'includes/post_comment.html' %} {% endcomment %}
                   {% include './includes/post_comment.html' %}
                 

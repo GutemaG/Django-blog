@@ -1,0 +1,48 @@
+<style type="text/css">
+	label{
+		display: block;
+		text: 3px 2px font-bold;
+	}
+	select, input{
+		height: 40px;
+	}
+	button{
+		/*display: inline-block;*/
+		width: 200px;
+		margin-top: 4px;
+		height: 30px;
+	}
+	.submit-button{
+		width: 100px;
+		display: block;
+	}
+</style>
+<body>
+	<div class="temp">
+		<h3>Temprature Convertor</h3>
+		<form>		
+			<label for="from">From :</label>
+			<select name="from" id="" required>
+			    <!-- <option value="">--Please choose an option--</option> -->
+			    <option value="kelvin">Kelvin</option>
+			    <option value="fahrenheit">Fahrenheit</option>
+			    <option value="celsius">Celsius</option>
+			</select>
+			<label for="to">To:</label>
+			<select name="to" id="" required>
+			    <!-- <option value="">--Please choose an option--</option> -->
+			    <option value="fahrenheit">Fahrenheit</option>
+			    <option value="kelvin">Kelvin</option>
+			    <option value="celsius">Celsius</option>
+			</select>
+			<label for="temp" class="temp-label">Enter Your temprature: </label>
+			<input type="number" name="temp" required>
+			<div class="submit-button">
+				<button type="submit">Convert</button>
+			</div>
+
+		</form>
+
+	</div>
+
+</body>
